@@ -20,7 +20,7 @@ theorem two_is_prime_help : Nat.Prime 2 := by
   have h : 2 ≤ 2 ∧ ∀ (n : Nat), n ∣ 2 → n = 1 ∨ n = 2 := by sorry
   exact by simp only [Nat.prime_def] <;> exact h
 
--- A similar sort of behavior is exhibited in the following Github issue:
+-- Perhaps more confusingly, the following doesn't work
 -- https://github.com/chasenorman/CanonicalLean/issues/29
 theorem dummy {p : ℕ} (hp : p.Prime) (h : ∃ r : ℕ, p = 2 ^ r + 1) :
   ∃ k : ℕ, p = 2 ^ (2 ^ k) + 1 := by
@@ -29,4 +29,4 @@ theorem dummy {p : ℕ} (hp : p.Prime) (h : ∃ r : ℕ, p = 2 ^ r + 1) :
 theorem exercise_13_4_10
     {p : ℕ} {hp : Nat.Prime p} (h : ∃ r : ℕ, p = 2 ^ r + 1) :
     ∃ (k : ℕ), p = 2 ^ (2 ^ k) + 1 := by
-    canonical [dummy]
+    canonical [dummy, congrFun]

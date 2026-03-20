@@ -14,5 +14,9 @@ name = "mathlib"
 scope = "leanprover-community"
 rev = "v4.29.0-rc6"
 
+[[require]]
+name = "Canonical"
+scope = "chasenorman"
+
 [[lean_lib]]
 name = "CanonicalTestingGround"

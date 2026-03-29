@@ -39,13 +39,16 @@ theorem canonical_compactumToCompHaus.essSurj : compactumToCompHaus.EssSurj := b
 -- This seems to work! I think there's a lot of potential for Canonical in
 -- category theory because many of the arguments rely mostly on chasing and
 -- using the right objects in the right definitions
+
+-- Actually, upon a new update, Canonical fails to find a proof
 theorem canonical_HasImageMap.transport {C : Type u} [Category.{v, u} C] {f g : Arrow C} [HasImage f.hom]
   [HasImage g.hom] (sq : f ⟶ g) (F : MonoFactorisation f.hom) {F' : MonoFactorisation g.hom}
   (hF' : IsImage F') (map : F.I ⟶ F'.I)
   (map_ι : CategoryStruct.comp map F'.m = CategoryStruct.comp F.m sq.right) :
   HasImageMap sq := by
+  sorry
   -- canonical [CategoryTheory.Limits.ImageMap.transport, CategoryTheory.Limits.HasImageMap.mk]
-  exact HasImageMap.mk (ImageMap.transport sq F hF' map_ι)
+  -- exact HasImageMap.mk (ImageMap.transport sq F hF' map_ι)
 
 #check CategoryTheory.Functor.mapHomotopyEquiv_inv
 

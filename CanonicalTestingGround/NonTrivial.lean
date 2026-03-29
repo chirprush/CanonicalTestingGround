@@ -11,8 +11,7 @@ theorem two_prime : Nat.Prime 2 := by
 -- already large, so it's not so surprising that Canonical would need a long
 -- time)
 theorem foil_nat (a b : Nat) : (a + b) * (a + b) = a * a + 2 * a * b + b * b := by
-  sorry
-  -- canonical 5 [Nat.right_distrib, Nat.left_distrib, Nat.mul_comm]
+  -- canonical [Nat.right_distrib, Nat.left_distrib, Nat.mul_comm]
 
 theorem exists_nontrivial_triple : ∃ a b c : Nat, 1 < a ∧ a * a + b * b = c * c := by
   sorry

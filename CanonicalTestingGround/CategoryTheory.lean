@@ -31,7 +31,7 @@ theorem canonical_CategoryTheory.Over.mono_homMk
 
 -- Lots of monomorphization errors again and some timeouts
 -- (remove +debug for more info)
-theorem canonical_compactumToCompHaus.essSurj : compactumToCompHaus.EssSurj := by
+instance canonical_compactumToCompHaus.essSurj : compactumToCompHaus.EssSurj := by
   canonical +debug [compactumToCompHaus.isoOfTopologicalSpace, Compactum.ofTopologicalSpace, CategoryTheory.Iso, Nonempty.intro, TopCat.carrier, compactumToCompHaus, True, TopCat, CompHaus, Compactum, CompHausLike.toTop, CategoryTheory.Functor.obj]
 
 #check CategoryTheory.Limits.HasImageMap.transport
@@ -57,7 +57,7 @@ theorem canonical_HasImageMap.transport {C : Type u} [Category.{v, u} C] {f g : 
 -- The line outputting these is [here](https://github.com/chasenorman/CanonicalLean/blob/80b1c39958f18845820bb1964bd372b0a2705b2f/Canonical/Monomorphize.lean#L166)
 -- Also, Canonical fails to solve a universe constraint
 
--- When run without +debug, Canonical crashes
+-- When run without +debug, Canonical crashes but only sometimes
 theorem canonical_CategoryTheory.Functor.mapHomotopyEquiv_inv
   {ι : Type u_1} {V : Type u} [Category.{v, u} V]
   [Preadditive V] {c : ComplexShape ι} {C D : HomologicalComplex V c} {W : Type u_2}

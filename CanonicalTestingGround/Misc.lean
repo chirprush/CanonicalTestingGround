@@ -31,3 +31,6 @@ def Back (f : Int → Int) :=
 theorem no_surjective_bounded_morphism (f : Int → Int) (hSurj : Surjective f) (hForth : Forth f) (hBack : Back f) :
   False := by
   canonical +debug [Forth, Back, Surjective]
+
+theorem or_inside_forall (p : ℕ → Prop) (h : ∀ k : ℕ, (p k ∨ 1 = 0)) : ∀ k : ℕ, p k := by
+  canonical -simp [Or.inl, Or.inr]

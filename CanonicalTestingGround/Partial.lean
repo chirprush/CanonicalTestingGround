@@ -52,10 +52,14 @@ theorem solve_using_dummy2 (h : ∃ k : ℕ, 128 * k = 256) : ∃ k : ℕ, 256 *
 
 -- The following is perhaps a simplification of the exercise above, and it runs
 -- into the same problem where Canonical outputs a proof term that doesn't typecheck
-theorem simple_dummy (a : ℕ) (h0 : a * a = 1024) (h1 : ∃ b : ℕ, b * b = 36) : ∃ k : ℕ, k * k = 36864 := by
+theorem simple_dummy (a : ℕ)
+  (h0 : a * a = 1024) (h1 : ∃ b : ℕ, b * b = 36) :
+  ∃ k : ℕ, k * k = 36864 := by
   sorry
 
-theorem solve_using_simple_dummy (a : ℕ) (h0 : a * a = 1024) (h1 : ∃ b : ℕ, b * b = 36) : ∃ k : ℕ, k * k = 36864 := by
+theorem solve_using_simple_dummy (a : ℕ)
+  (h0 : a * a = 1024) (h1 : ∃ b : ℕ, b * b = 36) :
+  ∃ k : ℕ, k * k = 36864 := by
   -- canonical -simp [simple_dummy]
   sorry
 
@@ -73,3 +77,6 @@ theorem solve_similar_dummy (p : ℕ) (hp : p ^ 2 = 1) (h : ∃ r : ℕ, p = 2 *
   -- outputs an incorrect proof term (if you run with -simp, then Canonical
   -- doesn't find anything). I'm not quite sure what's going on here
   sorry
+
+-- To illustrate what I mean about the ^ versus *, try changing h to
+-- (h : ∃ r : ℕ, p = 2 ^ r + 1) in both theorems.

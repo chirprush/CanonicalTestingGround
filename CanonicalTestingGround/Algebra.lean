@@ -22,4 +22,4 @@ theorem canonical_isMulIndecomposable_id_univ
 theorem canonical_RingCon.matrix_strictMono_of_nonempty
   {R : Type u_1} (n : Type u_2) [NonUnitalNonAssocSemiring R] [Fintype n] [Nonempty n] :
   StrictMono (RingCon.matrix (R := R) n) := by
-  canonical [RingCon.matrix_monotone, StrictMono, RingCon.matrix_injective, Monotone.strictMono_of_injective]
+  canonical [RingCon.matrix_monotone, RingCon.matrix_injective, Monotone.strictMono_of_injective]

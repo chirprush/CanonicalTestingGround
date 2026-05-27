@@ -2,6 +2,9 @@ import Canonical
 import Mathlib.Tactic
 import Init.Data.Function
 
+import Mathlib.Topology.Filter
+import Mathlib.RingTheory.Ideal.Prime
+
 open Function
 
 theorem zero_has_no_successor (hn : ∃ n : Nat, Nat.succ n = 0) : false := by
@@ -32,5 +35,32 @@ theorem no_surjective_bounded_morphism (f : Int → Int) (hSurj : Surjective f) 
   False := by
   canonical +debug [Forth, Back, Surjective]
 
-theorem or_inside_forall (p : ℕ → Prop) (h : ∀ k : ℕ, (p k ∨ 1 = 0)) : ∀ k : ℕ, p k := by
-  canonical -simp [Or.inl, Or.inr]
+-- theorem or_inside_forall (p : ℕ → Prop) (h : ∀ k : ℕ, (p k ∨ 1 = 0)) : ∀ k : ℕ, p k := by
+--   canonical -simp [Or.inl, Or.inr]
+
+#check Filter.isOpen_setOf_mem
+
+theorem isOpen_setOf_mem {s : Set α} : IsOpen { l : Filter α | s ∈ l } :=
+  Eq.subst (Filter.Iic_principal s) Filter.isOpen_Iic_principal
+
+-- Interestingly, canonical doesn't find the proof term given above
+-- In fact, something weird seems to be going on where if you fill in h2 in
+-- refine using Filter.isOpen_Iic_principal, it says the motive has no options?
+theorem canonical_isOpen_setOf_mem {s : Set α} : IsOpen { l : Filter α | s ∈ l } := by
+  canonical +refine [Filter.Iic_principal, Filter.isOpen_Iic_principal, Eq.subst]
+--  canonical [Filter.Iic_principal, Filter.isOpen_Iic_principal, Eq.subst]
+
+theorem isPrime_iff [Semiring α] {I : Ideal α} : Ideal.IsPrime I ↔ I ≠ ⊤ ∧ ∀ {x y : α}, x * y ∈ I → x ∈ I ∨ y ∈ I :=
+  ⟨fun h => ⟨h.1, h.2⟩, fun h => ⟨h.1, h.2⟩⟩
+
+-- Hmmm maybe I should also supply Canonical with the definitions used in the
+-- type? Actually, canonicalSimple seemed to get it using some other stuff taken
+-- from the type, but this is definitely something to experiment with
+theorem canonical_isPrime_iff [Semiring α] {I : Ideal α} : Ideal.IsPrime I ↔ I ≠ ⊤ ∧ ∀ {x y : α}, x * y ∈ I → x ∈ I ∨ y ∈ I :=
+  { mp := fun a ↦ ⟨fun a_1 ↦ a.1 a_1, fun {x y} a_1 ↦ a.2 a_1⟩,
+    mpr := fun a ↦ { ne_top' := fun a_1 ↦ a.1 a_1, mem_or_mem' := fun {x y} a_1 ↦ a.2 a_1 } }
+
+theorem bot_prime [Semiring α] [Nontrivial α] [NoZeroDivisors α] : (⊥ : Ideal α).IsPrime := Ideal.isPrime_bot
+
+theorem canonical_bot_prime [Semiring α] [Nontrivial α] [NoZeroDivisors α] : (⊥ : Ideal α).IsPrime := by
+  canonical [Ideal.isPrime_bot, Semiring, Nontrivial, NoZeroDivisors, Bot.bot]

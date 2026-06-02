@@ -1,0 +1,534 @@
+{"swap_hammingDist":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)],\n  Function.swap hammingDist = hammingDist",
+   "thmName": "swap_hammingDist",
+   "result": "timeout"}],
+ "hamming_zero_eq_dist":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {x y : (i : ι) → β i},\n  0 = hammingDist x y ↔ x = y",
+   "thmName": "hamming_zero_eq_dist",
+   "result": "timeout"}],
+ "hammingNorm_zero":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)], hammingNorm 0 = 0",
+   "thmName": "hammingNorm_zero",
+   "result": "timeout"}],
+ "hammingNorm_smul_le_hammingNorm":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {α : Type u_1} {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] [inst_3 : Zero α] [inst_4 : (i : ι) → SMulWithZero α (β i)] {k : α}\n  {x : (i : ι) → β i}, hammingNorm (k • x) ≤ hammingNorm x",
+   "thmName": "hammingNorm_smul_le_hammingNorm",
+   "result": "timeout"}],
+ "hammingNorm_smul":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {α : Type u_1} {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] [inst_3 : Zero α] [inst_4 : (i : ι) → SMulWithZero α (β i)] {k : α},\n  (∀ (i : ι), IsSMulRegular (β i) k) → ∀ (x : (i : ι) → β i), hammingNorm (k • x) = hammingNorm x",
+   "thmName": "hammingNorm_smul",
+   "result": "timeout"}],
+ "hammingNorm_pos_iff":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] {x : (i : ι) → β i}, 0 < hammingNorm x ↔ x ≠ 0",
+   "thmName": "hammingNorm_pos_iff",
+   "result": "timeout"}],
+ "hammingNorm_nonneg":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] {x : (i : ι) → β i}, 0 ≤ hammingNorm x",
+   "thmName": "hammingNorm_nonneg",
+   "result": "timeout"}],
+ "hammingNorm_ne_zero_iff":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] {x : (i : ι) → β i}, hammingNorm x ≠ 0 ↔ x ≠ 0",
+   "thmName": "hammingNorm_ne_zero_iff",
+   "result": "timeout"}],
+ "hammingNorm_lt_one":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] {x : (i : ι) → β i}, hammingNorm x < 1 ↔ x = 0",
+   "thmName": "hammingNorm_lt_one",
+   "result": "timeout"}],
+ "hammingNorm_le_card_fintype":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] {x : (i : ι) → β i}, hammingNorm x ≤ Fintype.card ι",
+   "thmName": "hammingNorm_le_card_fintype",
+   "result": "timeout"}],
+ "hammingNorm_eq_zero":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] {x : (i : ι) → β i}, hammingNorm x = 0 ↔ x = 0",
+   "thmName": "hammingNorm_eq_zero",
+   "result": "timeout"}],
+ "hammingNorm_comp_le_hammingNorm":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {γ : ι → Type u_4}\n  [inst_2 : (i : ι) → DecidableEq (γ i)] [inst_3 : (i : ι) → Zero (β i)] [inst_4 : (i : ι) → Zero (γ i)]\n  (f : (i : ι) → γ i → β i) {x : (i : ι) → γ i},\n  (∀ (i : ι), f i 0 = 0) → (hammingNorm fun i => f i (x i)) ≤ hammingNorm x",
+   "thmName": "hammingNorm_comp_le_hammingNorm",
+   "result": "timeout"}],
+ "hammingNorm_comp":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {γ : ι → Type u_4}\n  [inst_2 : (i : ι) → DecidableEq (γ i)] [inst_3 : (i : ι) → Zero (β i)] [inst_4 : (i : ι) → Zero (γ i)]\n  (f : (i : ι) → γ i → β i) {x : (i : ι) → γ i},\n  (∀ (i : ι), Function.Injective (f i)) → (∀ (i : ι), f i 0 = 0) → (hammingNorm fun i => f i (x i)) = hammingNorm x",
+   "thmName": "hammingNorm_comp",
+   "result": "timeout"}],
+ "hammingNorm.eq_1":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] (x : (i : ι) → β i), hammingNorm x = {i | x i ≠ 0}.card",
+   "thmName": "hammingNorm.eq_1",
+   "result": "timeout"}],
+ "hammingNorm.congr_simp":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] {inst_1 : (i : ι) → DecidableEq (β i)}\n  [inst_2 : (i : ι) → DecidableEq (β i)] [inst_3 : (i : ι) → Zero (β i)] (x x_1 : (i : ι) → β i),\n  x = x_1 → hammingNorm x = hammingNorm x_1",
+   "thmName": "hammingNorm.congr_simp",
+   "result": "timeout"}],
+ "hammingDist_zero_right":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] (x : (i : ι) → β i), hammingDist x 0 = hammingNorm x",
+   "thmName": "hammingDist_zero_right",
+   "result": "timeout"}],
+ "hammingDist_zero_left":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)], hammingDist 0 = hammingNorm",
+   "thmName": "hammingDist_zero_left",
+   "result": "timeout"}],
+ "hammingDist_triangle_right":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] (x y z : (i : ι) → β i),\n  hammingDist x y ≤ hammingDist x z + hammingDist y z",
+   "thmName": "hammingDist_triangle_right",
+   "result": "timeout"}],
+ "hammingDist_triangle_left":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] (x y z : (i : ι) → β i),\n  hammingDist x y ≤ hammingDist z x + hammingDist z y",
+   "thmName": "hammingDist_triangle_left",
+   "result": "timeout"}],
+ "hammingDist_triangle":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] (x y z : (i : ι) → β i),\n  hammingDist x z ≤ hammingDist x y + hammingDist y z",
+   "thmName": "hammingDist_triangle",
+   "result": "timeout"}],
+ "hammingDist_smul_le_hammingDist":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {α : Type u_1} {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → SMul α (β i)] {k : α} {x y : (i : ι) → β i}, hammingDist (k • x) (k • y) ≤ hammingDist x y",
+   "thmName": "hammingDist_smul_le_hammingDist",
+   "result": "timeout"}],
+ "hammingDist_smul":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {α : Type u_1} {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → SMul α (β i)] {k : α} {x y : (i : ι) → β i},\n  (∀ (i : ι), IsSMulRegular (β i) k) → hammingDist (k • x) (k • y) = hammingDist x y",
+   "thmName": "hammingDist_smul",
+   "result": "timeout"}],
+ "hammingDist_self":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] (x : (i : ι) → β i),\n  hammingDist x x = 0",
+   "thmName": "hammingDist_self",
+   "result": "timeout"}],
+ "hammingDist_pos":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {x y : (i : ι) → β i},\n  0 < hammingDist x y ↔ x ≠ y",
+   "thmName": "hammingDist_pos",
+   "result": "timeout"}],
+ "hammingDist_nonneg":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {x y : (i : ι) → β i},\n  0 ≤ hammingDist x y",
+   "thmName": "hammingDist_nonneg",
+   "result": "timeout"}],
+ "hammingDist_ne_zero":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {x y : (i : ι) → β i},\n  hammingDist x y ≠ 0 ↔ x ≠ y",
+   "thmName": "hammingDist_ne_zero",
+   "result": "timeout"}],
+ "hammingDist_lt_one":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {x y : (i : ι) → β i},\n  hammingDist x y < 1 ↔ x = y",
+   "thmName": "hammingDist_lt_one",
+   "result": "timeout"}],
+ "hammingDist_le_card_fintype":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {x y : (i : ι) → β i},\n  hammingDist x y ≤ Fintype.card ι",
+   "thmName": "hammingDist_le_card_fintype",
+   "result": "timeout"}],
+ "hammingDist_eq_zero":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {x y : (i : ι) → β i},\n  hammingDist x y = 0 ↔ x = y",
+   "thmName": "hammingDist_eq_zero",
+   "result": "timeout"}],
+ "hammingDist_eq_hammingNorm":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → AddGroup (β i)] (x y : (i : ι) → β i), hammingDist x y = hammingNorm (-x + y)",
+   "thmName": "hammingDist_eq_hammingNorm",
+   "result": "timeout"}],
+ "hammingDist_comp_le_hammingDist":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {γ : ι → Type u_4}\n  [inst_2 : (i : ι) → DecidableEq (γ i)] (f : (i : ι) → γ i → β i) {x y : (i : ι) → γ i},\n  (hammingDist (fun i => f i (x i)) fun i => f i (y i)) ≤ hammingDist x y",
+   "thmName": "hammingDist_comp_le_hammingDist",
+   "result": "timeout"}],
+ "hammingDist_comp":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {γ : ι → Type u_4}\n  [inst_2 : (i : ι) → DecidableEq (γ i)] (f : (i : ι) → γ i → β i) {x y : (i : ι) → γ i},\n  (∀ (i : ι), Function.Injective (f i)) → (hammingDist (fun i => f i (x i)) fun i => f i (y i)) = hammingDist x y",
+   "thmName": "hammingDist_comp",
+   "result": "timeout"}],
+ "hammingDist_comm":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] (x y : (i : ι) → β i),\n  hammingDist x y = hammingDist y x",
+   "thmName": "hammingDist_comm",
+   "result": "timeout"}],
+ "hammingDist.eq_1":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] (x y : (i : ι) → β i),\n  hammingDist x y = {i | x i ≠ y i}.card",
+   "thmName": "hammingDist.eq_1",
+   "result": "timeout"}],
+ "hammingDist.congr_simp":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] {inst_1 : (i : ι) → DecidableEq (β i)}\n  [inst_2 : (i : ι) → DecidableEq (β i)] (x x_1 : (i : ι) → β i),\n  x = x_1 → ∀ (y y_1 : (i : ι) → β i), y = y_1 → hammingDist x y = hammingDist x_1 y_1",
+   "thmName": "hammingDist.congr_simp",
+   "result": "timeout"}],
+ "eq_of_hammingDist_eq_zero":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] {x y : (i : ι) → β i},\n  hammingDist x y = 0 → x = y",
+   "thmName": "eq_of_hammingDist_eq_zero",
+   "result": "timeout"}],
+ "Hamming.toHamming_zero":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → Zero (β i)], Hamming.toHamming 0 = 0",
+   "thmName": "Hamming.toHamming_zero",
+   "result": "timeout"}],
+ "Hamming.toHamming_symm_eq":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3}, Hamming.toHamming.symm = Hamming.ofHamming",
+   "thmName": "Hamming.toHamming_symm_eq",
+   "result":
+   {"pass":
+    {"timeElapsed": 870,
+     "proof":
+     "fun {ι} {β} => by\n  simp only [Equiv.refl.eq_1, Equiv.symm.eq_1, Hamming.ofHamming.eq_1, Equiv.mk.injEq, Hamming.toHamming.eq_1] <;>\n    simpa only [Equiv.mk.injEq] using\n        Equiv.refl._proof_1 (((a : ι) → β a) ≃ ((a : ι) → β a))\n          { toFun := fun a => a, invFun := fun a => a, left_inv := fun x => Eq.refl x, right_inv := fun x => Eq.refl x }"}}}],
+ "Hamming.toHamming_sub":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → Sub (β i)] {x y : (i : ι) → β i},\n  Hamming.toHamming (x - y) = Hamming.toHamming x - Hamming.toHamming y",
+   "thmName": "Hamming.toHamming_sub",
+   "result": "timeout"}],
+ "Hamming.toHamming_smul":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {α : Type u_1} {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → SMul α (β i)] {r : α} {x : (i : ι) → β i},\n  Hamming.toHamming (r • x) = r • Hamming.toHamming x",
+   "thmName": "Hamming.toHamming_smul",
+   "result": "timeout"}],
+ "Hamming.toHamming_ofHamming":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} (x : Hamming β), Hamming.toHamming (Hamming.ofHamming x) = x",
+   "thmName": "Hamming.toHamming_ofHamming",
+   "result": "timeout"}],
+ "Hamming.toHamming_neg":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → Neg (β i)] {x : (i : ι) → β i},\n  Hamming.toHamming (-x) = -Hamming.toHamming x",
+   "thmName": "Hamming.toHamming_neg",
+   "result": "timeout"}],
+ "Hamming.toHamming_inj":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} {x y : (i : ι) → β i}, Hamming.toHamming x = Hamming.toHamming y ↔ x = y",
+   "thmName": "Hamming.toHamming_inj",
+   "result": "timeout"}],
+ "Hamming.toHamming_add":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → Add (β i)] {x y : (i : ι) → β i},\n  Hamming.toHamming (x + y) = Hamming.toHamming x + Hamming.toHamming y",
+   "thmName": "Hamming.toHamming_add",
+   "result": "timeout"}],
+ "Hamming.ofHamming_zero":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → Zero (β i)], Hamming.ofHamming 0 = 0",
+   "thmName": "Hamming.ofHamming_zero",
+   "result": "timeout"}],
+ "Hamming.ofHamming_toHamming":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} (x : (i : ι) → β i), Hamming.ofHamming (Hamming.toHamming x) = x",
+   "thmName": "Hamming.ofHamming_toHamming",
+   "result": "timeout"}],
+ "Hamming.ofHamming_symm_eq":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3}, Hamming.ofHamming.symm = Hamming.toHamming",
+   "thmName": "Hamming.ofHamming_symm_eq",
+   "result":
+   {"pass":
+    {"timeElapsed": 25140,
+     "proof":
+     "fun {ι} {β} => by\n  simp only [Equiv.refl.eq_1, Equiv.symm.eq_1, Hamming.ofHamming.eq_1, Equiv.mk.injEq, Hamming.toHamming.eq_1] <;>\n    simpa only [Equiv.mk.injEq] using rfl"}}}],
+ "Hamming.ofHamming_sub":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → Sub (β i)] {x y : Hamming β},\n  Hamming.ofHamming (x - y) = Hamming.ofHamming x - Hamming.ofHamming y",
+   "thmName": "Hamming.ofHamming_sub",
+   "result": "timeout"}],
+ "Hamming.ofHamming_smul":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {α : Type u_1} {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → SMul α (β i)] {r : α} {x : Hamming β},\n  Hamming.ofHamming (r • x) = r • Hamming.ofHamming x",
+   "thmName": "Hamming.ofHamming_smul",
+   "result": "timeout"}],
+ "Hamming.ofHamming_neg":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → Neg (β i)] {x : Hamming β},\n  Hamming.ofHamming (-x) = -Hamming.ofHamming x",
+   "thmName": "Hamming.ofHamming_neg",
+   "result": "timeout"}],
+ "Hamming.ofHamming_inj":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} {x y : Hamming β}, Hamming.ofHamming x = Hamming.ofHamming y ↔ x = y",
+   "thmName": "Hamming.ofHamming_inj",
+   "result": "timeout"}],
+ "Hamming.ofHamming_add":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : (i : ι) → Add (β i)] {x y : Hamming β},\n  Hamming.ofHamming (x + y) = Hamming.ofHamming x + Hamming.ofHamming y",
+   "thmName": "Hamming.ofHamming_add",
+   "result": "timeout"}],
+ "Hamming.norm_eq_hammingNorm":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → Zero (β i)] (x : Hamming β), ‖x‖ = ↑(hammingNorm (Hamming.ofHamming x))",
+   "thmName": "Hamming.norm_eq_hammingNorm",
+   "result": "timeout"}],
+ "Hamming.nnnorm_eq_hammingNorm":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)]\n  [inst_2 : (i : ι) → AddGroup (β i)] (x : Hamming β), ‖x‖₊ = ↑(hammingNorm (Hamming.ofHamming x))",
+   "thmName": "Hamming.nnnorm_eq_hammingNorm",
+   "result": "timeout"}],
+ "Hamming.nndist_eq_hammingDist":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] (x y : Hamming β),\n  nndist x y = ↑(hammingDist (Hamming.ofHamming x) (Hamming.ofHamming y))",
+   "thmName": "Hamming.nndist_eq_hammingDist",
+   "result": "timeout"}],
+ "Hamming.instDiscreteTopology":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)],\n  DiscreteTopology (Hamming β)",
+   "thmName": "Hamming.instDiscreteTopology",
+   "result": "timeout"}],
+ "Hamming.dist_eq_hammingDist":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {ι : Type u_2} {β : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → DecidableEq (β i)] (x y : Hamming β),\n  dist x y = ↑(hammingDist (Hamming.ofHamming x) (Hamming.ofHamming y))",
+   "thmName": "Hamming.dist_eq_hammingDist",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.natTrans_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D : Type u₂}\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {F G : CategoryTheory.Functor ((i : I) × C i) D}\n  (h : (i : I) → (CategoryTheory.Sigma.incl i).comp F ⟶ (CategoryTheory.Sigma.incl i).comp G) (i : I) (X : C i),\n  (CategoryTheory.Sigma.natTrans h).app ⟨i, X⟩ = (h i).app X",
+   "thmName": "CategoryTheory.Sigma.natTrans_app",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.natIso_inv":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D : Type u₂}\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {q₁ q₂ : CategoryTheory.Functor ((i : I) × C i) D}\n  (h : (i : I) → (CategoryTheory.Sigma.incl i).comp q₁ ≅ (CategoryTheory.Sigma.incl i).comp q₂),\n  (CategoryTheory.Sigma.natIso h).inv = CategoryTheory.Sigma.natTrans fun i => (h i).inv",
+   "thmName": "CategoryTheory.Sigma.natIso_inv",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.natIso_hom":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D : Type u₂}\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {q₁ q₂ : CategoryTheory.Functor ((i : I) × C i) D}\n  (h : (i : I) → (CategoryTheory.Sigma.incl i).comp q₁ ≅ (CategoryTheory.Sigma.incl i).comp q₂),\n  (CategoryTheory.Sigma.natIso h).hom = CategoryTheory.Sigma.natTrans fun i => (h i).hom",
+   "thmName": "CategoryTheory.Sigma.natIso_hom",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.map_obj":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {J : Type w₂} (g : J → I)\n  (j : J) (X : C (g j)), (CategoryTheory.Sigma.map C g).obj ⟨j, X⟩ = ⟨g j, X⟩",
+   "thmName": "CategoryTheory.Sigma.map_obj",
+   "result":
+   {"pass":
+    {"timeElapsed": 3889,
+     "proof":
+     "fun {I} C [(i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {J} g j X => by\n  simp only [Sigma.mk.injEq, CategoryTheory.Sigma.desc.eq_1, CategoryTheory.Sigma.incl.eq_1,\n      CategoryTheory.Sigma.map.eq_1] <;>\n    simpa only [Sigma.mk.injEq] using Eq.refl ⟨g j, X⟩"}}}],
+ "CategoryTheory.Sigma.map_map":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {J : Type w₂} (g : J → I)\n  {j : J} {X Y : C (g j)} (f : X ⟶ Y),\n  (CategoryTheory.Sigma.map C g).map (CategoryTheory.Sigma.SigmaHom.mk f) = CategoryTheory.Sigma.SigmaHom.mk f",
+   "thmName": "CategoryTheory.Sigma.map_map",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.mapId_inv_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ (I : Type w₁) (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)]\n  (x : (i : I) × (fun i => C (id i)) i),\n  (CategoryTheory.Sigma.mapId I C).inv.app x = CategoryTheory.CategoryStruct.id ⟨x.fst, x.snd⟩",
+   "thmName": "CategoryTheory.Sigma.mapId_inv_app",
+   "result":
+   {"pass":
+    {"timeElapsed": 30954,
+     "proof":
+     "fun I C [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] x =>\n  _inhabitedExprDummy I C (fun i => (inst i).1.1.1) (fun i => (inst i).1.2) (fun i => (inst i).1.3) ⋯ ⋯ ⋯ x.1 x.2"}}}],
+ "CategoryTheory.Sigma.mapId_hom_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ (I : Type w₁) (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)]\n  (x : (i : I) × (fun i => C (id i)) i),\n  (CategoryTheory.Sigma.mapId I C).hom.app x = CategoryTheory.CategoryStruct.id ⟨x.fst, x.snd⟩",
+   "thmName": "CategoryTheory.Sigma.mapId_hom_app",
+   "result":
+   {"pass":
+    {"timeElapsed": 29557,
+     "proof":
+     "fun I C [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] x =>\n  _inhabitedExprDummy I C (fun i => (inst i).1.1.1) (fun i => (inst i).1.2) (fun i => (inst i).1.3) ⋯ ⋯ ⋯ x.1 x.2"}}}],
+ "CategoryTheory.Sigma.mapComp_inv_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {J : Type w₂} {K : Type w₃}\n  (f : K → J) (g : J → I) (X : (i : K) × (fun i => C (g (f i))) i),\n  (CategoryTheory.Sigma.mapComp C f g).inv.app X = CategoryTheory.CategoryStruct.id ⟨g (f X.fst), X.snd⟩",
+   "thmName": "CategoryTheory.Sigma.mapComp_inv_app",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.mapComp_hom_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {J : Type w₂} {K : Type w₃}\n  (f : K → J) (g : J → I) (X : (i : K) × (fun i => C (g (f i))) i),\n  (CategoryTheory.Sigma.mapComp C f g).hom.app X = CategoryTheory.CategoryStruct.id ⟨g (f X.fst), X.snd⟩",
+   "thmName": "CategoryTheory.Sigma.mapComp_hom_app",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.instFullSigmaIncl":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] (i : I),\n  (CategoryTheory.Sigma.incl i).Full",
+   "thmName": "CategoryTheory.Sigma.instFullSigmaIncl",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.instFaithfulSigmaIncl":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] (i : I),\n  (CategoryTheory.Sigma.incl i).Faithful",
+   "thmName": "CategoryTheory.Sigma.instFaithfulSigmaIncl",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.incl_obj":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {i : I} (X : C i),\n  (CategoryTheory.Sigma.incl i).obj X = ⟨i, X⟩",
+   "thmName": "CategoryTheory.Sigma.incl_obj",
+   "result":
+   {"pass":
+    {"timeElapsed": 878,
+     "proof":
+     "fun {I} {C} [(i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {i} X => by\n  simp only [Sigma.mk.injEq, CategoryTheory.Sigma.incl.eq_1] <;> simpa only [Sigma.mk.injEq] using rfl"}}}],
+ "CategoryTheory.Sigma.incl_map":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] (i : I) {X Y : C i}\n  (a : X ⟶ Y), (CategoryTheory.Sigma.incl i).map a = CategoryTheory.Sigma.SigmaHom.mk a",
+   "thmName": "CategoryTheory.Sigma.incl_map",
+   "result":
+   {"pass":
+    {"timeElapsed": 25706,
+     "proof":
+     "fun {I} {C} [(i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] i {X Y} a => by\n  simp only [CategoryTheory.Sigma.SigmaHom.mk.injEq, CategoryTheory.Sigma.incl.eq_1] <;> exact Eq.refl a"}}}],
+ "CategoryTheory.Sigma.inclCompMap_inv_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {J : Type w₂} (g : J → I)\n  (j : J) (X : C (g j)), (CategoryTheory.Sigma.inclCompMap C g j).inv.app X = CategoryTheory.CategoryStruct.id ⟨g j, X⟩",
+   "thmName": "CategoryTheory.Sigma.inclCompMap_inv_app",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.inclCompMap_hom_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {J : Type w₂} (g : J → I)\n  (j : J) (X : C (g j)), (CategoryTheory.Sigma.inclCompMap C g j).hom.app X = CategoryTheory.CategoryStruct.id ⟨g j, X⟩",
+   "thmName": "CategoryTheory.Sigma.inclCompMap_hom_app",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.desc_obj":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D : Type u₂}\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (F : (i : I) → CategoryTheory.Functor (C i) D) (X : (i : I) × C i),\n  (CategoryTheory.Sigma.desc F).obj X = (F X.fst).obj X.snd",
+   "thmName": "CategoryTheory.Sigma.desc_obj",
+   "result":
+   {"pass":
+    {"timeElapsed": 32536,
+     "proof":
+     "fun {I} {C} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n    F X =>\n  _inhabitedExprDummy I C inst D inst_1 (fun i => (F i).1) (fun i => (F i).2) ⋯ ⋯ X.1 X.2"}}}],
+ "CategoryTheory.Sigma.desc_map_mk":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D : Type u₂}\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (F : (i : I) → CategoryTheory.Functor (C i) D) {i : I} (X Y : C i)\n  (f : X ⟶ Y), (CategoryTheory.Sigma.desc F).map (CategoryTheory.Sigma.SigmaHom.mk f) = (F i).map f",
+   "thmName": "CategoryTheory.Sigma.desc_map_mk",
+   "result":
+   {"pass":
+    {"timeElapsed": 25606,
+     "proof":
+     "fun {I} {C} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n    F {i} X Y f =>\n  _inhabitedExprDummy I C (fun i => (inst i).1.1.1) (fun i => (inst i).1.2) (fun i => (inst i).1.3) ⋯ ⋯ ⋯ D inst_1.1.1.1\n    inst_1.1.2 inst_1.1.3 ⋯ ⋯ ⋯ (fun i => (F i).1) (fun i => (F i).2) ⋯ ⋯ i X Y f"}}}],
+ "CategoryTheory.Sigma.descUniq_inv_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D : Type u₂}\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (F : (i : I) → CategoryTheory.Functor (C i) D)\n  (q : CategoryTheory.Functor ((i : I) × C i) D) (h : (i : I) → (CategoryTheory.Sigma.incl i).comp q ≅ F i) (i : I)\n  (X : C i), (CategoryTheory.Sigma.descUniq F q h).inv.app ⟨i, X⟩ = (h i).inv.app X",
+   "thmName": "CategoryTheory.Sigma.descUniq_inv_app",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.descUniq_hom_app":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {D : Type u₂}\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (F : (i : I) → CategoryTheory.Functor (C i) D)\n  (q : CategoryTheory.Functor ((i : I) × C i) D) (h : (i : I) → (CategoryTheory.Sigma.incl i).comp q ≅ F i) (i : I)\n  (X : C i), (CategoryTheory.Sigma.descUniq F q h).hom.app ⟨i, X⟩ = (h i).hom.app X",
+   "thmName": "CategoryTheory.Sigma.descUniq_hom_app",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.SigmaHom.mk.sizeOf_spec":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] [inst_1 : SizeOf I]\n  [inst_2 : (a : I) → SizeOf (C a)] {i : I} {X Y : C i} (a : X ⟶ Y),\n  sizeOf (CategoryTheory.Sigma.SigmaHom.mk a) = 1 + sizeOf i + sizeOf X + sizeOf Y + sizeOf a",
+   "thmName": "CategoryTheory.Sigma.SigmaHom.mk.sizeOf_spec",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.SigmaHom.mk.injEq":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {i : I} {X Y : C i}\n  (a a_1 : X ⟶ Y), (CategoryTheory.Sigma.SigmaHom.mk a = CategoryTheory.Sigma.SigmaHom.mk a_1) = (a = a_1)",
+   "thmName": "CategoryTheory.Sigma.SigmaHom.mk.injEq",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.SigmaHom.mk.inj":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} {inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)} {i : I} {X Y : C i}\n  {a a_1 : X ⟶ Y}, CategoryTheory.Sigma.SigmaHom.mk a = CategoryTheory.Sigma.SigmaHom.mk a_1 → a = a_1",
+   "thmName": "CategoryTheory.Sigma.SigmaHom.mk.inj",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.SigmaHom.id_comp":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {X Y : (i : I) × C i}\n  (f : X ⟶ Y), CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.id X) f = f",
+   "thmName": "CategoryTheory.Sigma.SigmaHom.id_comp",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.SigmaHom.comp_id":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {X Y : (i : I) × C i}\n  (f : X ⟶ Y), CategoryTheory.CategoryStruct.comp f (CategoryTheory.CategoryStruct.id Y) = f",
+   "thmName": "CategoryTheory.Sigma.SigmaHom.comp_id",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.SigmaHom.comp_def":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] (i : I) (X Y Z : C i)\n  (f : X ⟶ Y) (g : Y ⟶ Z),\n  (CategoryTheory.Sigma.SigmaHom.mk f).comp (CategoryTheory.Sigma.SigmaHom.mk g) =\n    CategoryTheory.Sigma.SigmaHom.mk (CategoryTheory.CategoryStruct.comp f g)",
+   "thmName": "CategoryTheory.Sigma.SigmaHom.comp_def",
+   "result": "timeout"}],
+ "CategoryTheory.Sigma.SigmaHom.assoc":
+ [{"version": "4.30-initial",
+   "thmStatement":
+   "∀ {I : Type w₁} {C : I → Type u₁} [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {X Y Z W : (i : I) × C i}\n  (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W),\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h =\n    CategoryTheory.CategoryStruct.comp f (CategoryTheory.CategoryStruct.comp g h)",
+   "thmName": "CategoryTheory.Sigma.SigmaHom.assoc",
+   "result": "timeout"}]}

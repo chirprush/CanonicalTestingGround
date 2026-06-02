@@ -8,6 +8,7 @@ import Mathlib.Algebra.Homology.Homotopy
 import Canonical
 import Mathlib.Algebra.Category.ModuleCat.Basic
 import Mathlib.Topology.Category.Compactum
+import Mathlib.CategoryTheory.Abelian.Injective.Dimension
 
 open CategoryTheory Limits Comma
 
@@ -65,3 +66,13 @@ theorem canonical_CategoryTheory.Functor.mapHomotopyEquiv_inv
   (F : Functor V W) [F.Additive] (h : HomotopyEquiv C D) :
   (F.mapHomotopyEquiv h).inv = (F.mapHomologicalComplex c).map h.inv := by
   canonical +debug [HomologicalComplex, HomologicalComplex.Hom, HomotopyEquiv.inv, Eq.refl, CategoryTheory.Functor.mapHomotopyEquiv, CategoryTheory.Functor.obj, CategoryTheory.Functor.mapHomologicalComplex]
+
+#check CategoryTheory.injectiveDimension_eq_of_iso
+#check WithBot
+#check CategoryTheory.injectiveDimension
+#check ENat
+#check Eq
+
+theorem canonical_injDim_eq_of_iso.{v, u} {C : Type u} [Category.{v, u} C] [Abelian C] {X Y : C} (e : X ≅ Y) :
+  injectiveDimension X = injectiveDimension Y := by
+  canonical 3 [WithBot, CategoryTheory.injectiveDimension, ENat, Eq]

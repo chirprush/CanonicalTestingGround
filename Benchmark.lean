@@ -17,28 +17,60 @@ structure BenchEntry where
   result : BenchResult
   deriving FromJson, ToJson, Inhabited
 
+-- def canonicalSimple (type : Expr) (names : NameSet) : MetaM BenchResult := do
+--   IO.setNumHeartbeats 0
+--   let premises := names.toArray
+--   let env ← getEnv
+--   let startTime ← IO.monoMsNow
+--   let structs ← premises.filterMapM Destruct.getStruct
+--   let structs := structs ++ (premises.filter (isStructure env))
+--   let premises ← premises.filterM fun name => do pure (← Destruct.getStruct name).isNone
+--   let config := {} -- Do I really need this or can I just leave it empty?
+--   let goal ← mkFreshExprMVar type
+--   let (goal', reconstruct) ← Canonical.withArityUnfold config.monomorphize do
+--     Canonical.preprocess goal.mvarId! config structs
+--   let typ ← Canonical.withArityUnfold config.monomorphize do goal'.withContext do
+--     Canonical.toCanonical (← goal'.getType) premises (structs.push ``Canonical.Pi) config
+--   -- Run canonical on the current thread
+--   -- Perhaps we can use tryCatchRuntimeEx or something to capture panics?
+--   let result ← Canonical.canonical typ s!"{← IO.rand 0 999}" 3 config.count
+--   let proofs ← Canonical.postprocess result goal' config reconstruct
+--   let endTime ← IO.monoMsNow
+--   -- I'm not sure if it's quite correct to say that this is a timeout since it
+--   -- could also be the case that Canonical exhausts the entire search/fails
+--   let some first := proofs[0]? | (pure .timeout)
+--   return .pass (endTime - startTime) (← ppExpr first).pretty'
+
+-- Taken from https://github.com/chasenorman/CanonicalLean/blob/master/Canonical/Tactic.lean
+-- For some reason (I'll have to figure this out), there are still some
+-- discrepancies with this and the actual tactic output
 def canonicalSimple (type : Expr) (names : NameSet) : MetaM BenchResult := do
   IO.setNumHeartbeats 0
-  let premises := names.toArray
-  let env ← getEnv
   let startTime ← IO.monoMsNow
-  let structs ← premises.filterMapM Destruct.getStruct
-  let structs := structs ++ (premises.filter (isStructure env))
-  let premises ← premises.filterM fun name => do pure (← Destruct.getStruct name).isNone
-  let config := { count := 1 } -- Do I really need this or can I just leave it empty?
-  let goal ← mkFreshExprMVar type
-  let (goal', reconstruct) ← Canonical.withArityUnfold config.monomorphize do
-    Canonical.preprocess goal.mvarId! config structs
-  let typ ← Canonical.withArityUnfold config.monomorphize do goal'.withContext do
-    Canonical.toCanonical (← goal'.getType) premises (structs.push ``Canonical.Pi) config
-  -- Run canonical on the current thread
-  -- Perhaps we can use tryCatchRuntimeEx or something to capture panics?
-  let result ← Canonical.canonical typ s!"{← IO.rand 0 999}" 3 config.count
-  let proofs ← Canonical.postprocess result goal' config reconstruct
+
+  let consts := names.toArray
+  let config : Canonical.Config := {}
+  -- Potential difference from tactic in this line, but it's not obvious why
+  -- this would be problematic
+  let goalMVar ← mkFreshExprMVar type
+  let goal := goalMVar.mvarId!
+
+  let (premises, structs) ← Canonical.getPremises goal consts config
+
+  let (processedGoal, reconstruct) ← Canonical.withArityUnfold config.monomorphize do
+    Canonical.preprocess goal config structs
+
+  let typ ← Canonical.withArityUnfold config.monomorphize do processedGoal.withContext do
+    Canonical.toCanonical (← processedGoal.getType) premises (structs.push ``Canonical.Pi) config
+
+  let timeout := 3
+  let result ← Canonical.canonical typ s!"{← IO.rand 0 99}" timeout config.count
+
+  let proofs ← Canonical.postprocess result goal config reconstruct
   let endTime ← IO.monoMsNow
-  -- I'm not sure if it's quite correct to say that this is a timeout since it
-  -- could also be the case that Canonical exhausts the entire search/fails
-  let some first := proofs[0]? | (pure .timeout)
+
+  let some first := proofs[0]? | pure .timeout
+  -- Check [here](https://github.com/leanprover/lean4/blob/7490891f406b711fbe901f1fc69824de1f318645/src/Lean/Meta/Tactic/TryThis.lean#L217) for formatting
   return .pass (endTime - startTime) (← ppExpr first).pretty'
 
 -- Filters to remove non-theorems, internal theorems, and theorems that do not
@@ -54,11 +86,14 @@ def isValidConstant (env : Environment) (allowed : Array Name) (name : Name) (c 
 -- Could use Expr.getUsedConstants and filter maybe
 partial def getDependencies (env : Environment) (e : Expr) : NameSet :=
   match e with
-  | .const name _ =>
-    let c := (env.find? name).get!
-    if c matches .thmInfo _ -- && !Name.isInternal name
-    then singleton name
-    else NameSet.empty
+  | .const name _ => if !Name.isInternal name then singleton name else NameSet.empty
+    -- It's sometimes beneficial to add definitions it seems
+    -- TODO: Ask Chase for a better mechanism to tell what's relevant or not.
+
+    -- let c := (env.find? name).get!
+    -- if c matches .thmInfo _ -- && !Name.isInternal name
+    -- then singleton name
+    -- else NameSet.empty
   | .app _ _ =>
     let fn := e.getAppFn'
     let args := e.getAppArgs.toList
@@ -89,6 +124,15 @@ def readBenchResults (path : String) : IO (TreeMap.Raw String (Array BenchEntry)
   | Except.ok t => pure $ t.map (fun (_ : String) (x : Json) => (FromJson.fromJson? x).toOption.get!)
   | _ => throw $ IO.userError "Ill-formed JSON for benchmark results"
 
+def saveBenchResult (br : TreeMap.Raw String (Array BenchEntry)) (key : String) (entry : BenchEntry) : TreeMap.Raw String (Array BenchEntry) :=
+  let prevEntries := br.getD key #[]
+  br.insert key (prevEntries.push entry)
+
+def writeBenchResults (br : TreeMap.Raw String (Array BenchEntry)) : IO Unit := do
+  -- Could also use compressed instead of pretty
+  let serialized := (Json.obj $ br.map (fun _ entry => entry.toJson)).pretty
+  IO.FS.writeFile "benchResults.json" serialized
+
 unsafe def main (args : List String) : IO Unit := do
   Lean.initSearchPath (← Lean.findSysroot)
   enableInitializersExecution
@@ -103,7 +147,10 @@ unsafe def main (args : List String) : IO Unit := do
   let benching := #[
     -- `Mathlib.Topology.Filter
     -- `Mathlib.LinearAlgebra.Matrix.Ideal
-    `Mathlib.RingTheory.Ideal.Prime
+    -- `Mathlib.RingTheory.Ideal.Prime
+    -- `Mathlib.CategoryTheory.Abelian.Injective.Dimension
+    `Mathlib.InformationTheory.Hamming,
+    `Mathlib.CategoryTheory.Sigma.Basic
   ]
 
 
@@ -124,54 +171,55 @@ unsafe def main (args : List String) : IO Unit := do
 
     let env := ← getEnv
 
-    IO.println "Running benchmark!"
+    IO.println s!"Running benchmark ({constants.size} total constants)"
 
-    constants.forM (fun cname => do
-      let prevResults := (← benchResults.get).getD (cname.toString) #[]
-      if (prevResults.map (·.version)).contains version then do
-        IO.println s!"Benching {cname}"
-        IO.println   "  -> skipped"
-        return ()
+    try
+      let tasks : Array (Option (Task _)) ← constants.mapM (fun cname => do
+        let prevResults := (← benchResults.get).getD (cname.toString) #[]
+        if (prevResults.map (BenchEntry.version ·)).contains version then do
+          IO.println s!"Benching {cname}"
+          IO.println   "  -> skipped"
+          return none
 
-      let _ ← IO.asTask $ (do
-        let value := (env.find? cname).get!.value!
-        let type := (env.find? cname).get!.type
-        let dependencies := getDependencies env value
-        -- It might be a good idea to add definitions into the premises because
-        -- this greatly improves stuff it seems
-        let result ← canonicalSimple type (dependencies.insert `Ideal.IsPrime)
-        IO.println s!"Benching {cname}"
-        IO.println s!"  -> type: {type}"
-        -- IO.println s!"  -> proof: {value}"
-        IO.println s!"  -> premises: {dependencies.toArray}"
-        match result with
-        | .panic msg => IO.println s!"  -> panic (msg: {msg})"
-        | .timeout => IO.println "  -> timeout"
-        | .pass time proof => IO.println s!"  -> pass (time elapsed: {time})"
-      ).toIO (ctxCore := ctx) (sCore := s)
+        let task ← IO.asTask $ ((do
+          let value := (env.find? cname).get!.value! (allowOpaque := true)
+          let type := (env.find? cname).get!.type
+          -- It might be a good idea to add definitions into the premises because
+          -- this greatly improves stuff it seems
+          let dependencies := (getDependencies env value) ++ (getDependencies env type)
+          IO.println s!"Benching {cname}"
+          IO.println s!"  -> premises: {dependencies.toArray}"
+          let result ← canonicalSimple type dependencies -- (dependencies.insert `Ideal.IsPrime)
+          IO.println s!"Finished {cname}"
+          match result with
+          | .panic msg => IO.println s!"  -> panic (msg: {msg})"
+          | .timeout => IO.println "  -> timeout"
+          | .pass time proof => IO.println s!"  -> pass (time elapsed: {time})"
 
+          benchResults.set $
+            saveBenchResult (← benchResults.get) cname.toString
+            {
+              thmName := cname.toString,
+              thmStatement := (← ppExpr type).pretty',
+              result := result,
+              version := version
+            }
+        ) : MetaM Unit).toIO (ctxCore := ctx) (sCore := s)
 
-      -- TODO:
-      -- -> Now that we've filtered the theorems correctly let's try and adapt
-      --    runOnConst for our purposes (what's going on with the value stuff?
-      --    are we extracting the dependencies and then running Canonical given
-      --    on those dependencies? because I thought the theorem statement in of
-      --    itself would be in the type field)
-      -- -> I understand the above now a little bit better! We pass in the value
-      --    (the proof) likely to get symbols from it (this is the main point I
-      --    can't immediately see), but the way that we access the type is via
-      --    inferType which just gives the same value back because the
-      --    expressions typecheck already
-      -- -> Figure out multithreading and how we want to do this
-    )
+        return (some task)
+      )
 
--- I think my plan is going to be the following:
--- Fade the stuff in DataGeneration (trying to understand if it's even aligned
--- with what I'm trying to do is taking up time) and at least do what is the
--- natural solution for me:
--- -> Collect all theorem dependencies used in the proof (either recycle some
---    code from relevant or use a little bit of iterFast)
--- -> Feed these into Canonical as premises and sit back and let it do it's
---    thing lowkey
--- This actually works! Yippee! I'm not quite sure how to handle panics yet but
--- this will probably be apparent
+      let _ ← IO.mapTasks
+        (fun _ => do writeBenchResults (← benchResults.get))
+        tasks.reduceOption.toList
+    finally
+      -- This is kinda useless because it gets run before any of the threads run
+      -- I should figure out proper panic handling, because it would be bad if
+      -- benchmark progress was lost because of it (maybe we should write to the
+      -- .json every N theorems for autosaving?)
+      writeBenchResults (← benchResults.get)
+
+-- Things to look into:
+-- -> Specific benchmark targets (things with binders like integralsl,
+--    derivatives, sums, etc.) <- this relies a lot on the relevant
+--    theorems/definitions and needs some care

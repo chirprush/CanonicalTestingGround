@@ -5,6 +5,10 @@ import Init.Data.Function
 import Mathlib.Topology.Filter
 import Mathlib.RingTheory.Ideal.Prime
 
+import Mathlib.InformationTheory.Hamming
+
+import Mathlib.CategoryTheory.Sigma.Basic
+
 open Function
 
 theorem zero_has_no_successor (hn : ∃ n : Nat, Nat.succ n = 0) : false := by
@@ -64,3 +68,28 @@ theorem bot_prime [Semiring α] [Nontrivial α] [NoZeroDivisors α] : (⊥ : Ide
 
 theorem canonical_bot_prime [Semiring α] [Nontrivial α] [NoZeroDivisors α] : (⊥ : Ideal α).IsPrime := by
   canonical [Ideal.isPrime_bot, Semiring, Nontrivial, NoZeroDivisors, Bot.bot]
+
+#check hammingDist_nonneg
+
+variable {α ι : Type*} {β : ι → Type*} [Fintype ι] [∀ i, DecidableEq (β i)]
+variable {γ : ι → Type*} [∀ i, DecidableEq (γ i)]
+
+theorem canonical_hammingDist_nonneg {x y : ∀ i, β i} : 0 ≤ hammingDist x y := by
+  canonical [zero_le]
+
+#check CategoryTheory.Sigma.inclDesc_inv_app
+
+universe w₁ w₂ w₃ v₁ v₂ u₁ u₂
+
+variable {I : Type w₁} {C : I → Type u₁} [∀ i, CategoryTheory.Category.{v₁} (C i)]
+variable {D : Type u₂} [CategoryTheory.Category.{v₂} D] (F : ∀ i, CategoryTheory.Functor (C i) D)
+
+-- Fails to monomorphize
+-- theorem inclDesc_inv_app (i : I) (X : C i) : (CategoryTheory.Sigma.inclDesc F i).inv.app X = CategoryTheory.CategoryStruct.id ((F i).obj X) := by
+--   canonical [CategoryTheory.Functor, CategoryTheory.CategoryStruct.toQuiver, Quiver.Hom, CategoryTheory.Sigma.incl, CategoryTheory.Functor.category, CategoryTheory.Functor.comp, CategoryTheory.CategoryStruct.id, CategoryTheory.Sigma.sigma, CategoryTheory.Sigma.desc, CategoryTheory.Category.toCategoryStruct, CategoryTheory.Sigma.inclDesc, Eq, CategoryTheory.Iso.inv, CategoryTheory.Functor.obj, CategoryTheory.NatTrans.app, Sigma, rfl]
+
+#check CategoryTheory.Sigma.inclDesc_hom_app
+
+-- Same here
+example (i : I) (X : C i) : (CategoryTheory.Sigma.inclDesc F i).hom.app X = CategoryTheory.CategoryStruct.id ((F i).obj X) := by
+  canonical 3 [CategoryTheory.Functor, CategoryTheory.CategoryStruct.toQuiver, Quiver.Hom, CategoryTheory.Sigma.incl, CategoryTheory.Functor.category, CategoryTheory.Functor.comp, CategoryTheory.CategoryStruct.id, CategoryTheory.Sigma.sigma, CategoryTheory.Sigma.desc, CategoryTheory.Category.toCategoryStruct, CategoryTheory.Sigma.inclDesc, CategoryTheory.Iso.hom, Eq, CategoryTheory.Functor.obj, CategoryTheory.NatTrans.app, Sigma, rfl]

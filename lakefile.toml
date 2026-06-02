@@ -17,7 +17,7 @@ supportInterpreter = true
 [[require]]
 name = "mathlib"
 scope = "leanprover-community"
-rev = "v4.29.0"
+rev = "v4.30.0"
 
 [[require]]
 name = "Canonical"

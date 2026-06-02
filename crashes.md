@@ -1,5 +1,8 @@
-Caused by trying to use `canonical [Filter.nhds_eq', Filter.tendsto_lift', Set.mem_setOf_eq]` on `Filter.tendsto_nhds`
+Not sure I'll be able to reproduce, but during testing I got this panic:
 ```
-thread '<unnamed>' (65640) panicked at crates/canonical-core/src/core.rs:269:26:
-index out of bounds: the len is 0 but the index is 0
+PANIC at Canonical.fromTerm Canonical.FromCanonical:69:6: assertion violation: xs.size == t.params.size
 ```
+I don't know which exact theorem it was from though. That being said, I would be
+able to narrow it down to three if I took the set difference of all 86 constants
+in the two modules with the 83 constants that actually got a benchmark entry
+saved. 
